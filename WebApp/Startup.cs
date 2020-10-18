@@ -26,6 +26,7 @@ namespace WebApp
             services.AddMvc();
 
             services.AddScoped<IAlbumsDataService, AlbumsDataService>();
+            services.AddScoped<IPhotosDataService, PhotosDataService>();
 
         }
 

@@ -18,6 +18,7 @@ namespace WebAppTests
             var albums = dataService.GetAlbums().Result;
 
             //-- Assert
+            
             Assert.IsTrue(albums.Count() == 100);
         }
     }
