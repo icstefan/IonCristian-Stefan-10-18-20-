@@ -1,5 +1,5 @@
 ﻿
-@model IEnumerable<WebApp.DTOs.AlbumDTO>
+@model WebApp.ViewModels.AlbumsViewModel;
 @{
     ViewData["Title"] = "Index";
 }
@@ -12,16 +12,14 @@
 
 <div>
     <h2>List of albums</h2>
-    <form asp-controller="Entertainers" asp-action="CreateEntertainer" method="post">
+    <form asp-controller="Photos" asp-action="PhotosForAlbum" method="post">
         <div class="form-group">
             <div>
-                <label asp-for="FirstName">Albums</label>
+                <label>Albums</label>
             </div>
-            <select name="albums" id="albums">
-                @foreach (var item in Model)
-                {
-                    <option value="item.Id">@item.Title</option>
-                }
+            <select asp-for="AlbumId"
+                    asp-items="@(new SelectList(Model.AlbumsList,"Id","Title"))">
+                <option>Please select one</option>
             </select>
             <input type="submit" value="View album" class="btn btn-sml btn-primary" />
         </div>

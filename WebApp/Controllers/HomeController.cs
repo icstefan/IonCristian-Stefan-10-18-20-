@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApp.DataServices;
+using WebApp.ViewModels;
 
 namespace WebApp.Controllers
 {
@@ -25,7 +26,12 @@ namespace WebApp.Controllers
                 ViewBag.Message = "No albums in the database";
             }
 
-            return View(albums);
+            var vm = new AlbumsViewModel()
+            {
+                AlbumsList = albums.ToList()
+            };
+
+            return View(vm);
         }
     }
 }
