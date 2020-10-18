@@ -1,0 +1,51 @@
+﻿
+@model WebApp.ViewModels.PhotosForAlbumViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>@ViewBag.Message</h2>
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<h2 class="text-success">@ViewBag.SuccessMessage</h2>
+
+<div>
+    <h2>List of photos for album</h2>
+    <br />
+    <table>
+        <tr>
+            <td>Title</td>
+            <td>Url</td>
+            <td>ThumbnailUrl</td>
+            <td></td>
+        </tr>
+        @foreach (var photo in Model.PhotosList)
+        {
+            <tr>
+                <td>@photo.Title</td>
+                <td><img src="@photo.Url" width="20px" height="20px" /></td>
+                <td><img src="@photo.ThumbnailUrl" width="20px" height="20px" /></td>
+                <td><button onclick="updateComments(@photo.Id)">View Comments</button></td>
+            </tr>
+        }
+    </table>
+    <span id="commentsBox"></span>
+
+</div>
+<script>
+    function httpGet(theUrl) {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", theUrl, false); // false for synchronous request
+        xmlHttp.send(null);
+        return xmlHttp.responseText;
+    }
+
+    const updateComments = (photoId) => {
+        var result = httpGet("https://jsonplaceholder.typicode.com/photos/" + photoId + "/comments");
+        var comments = JSON.parse(result).map(r => r.body);
+        console.log("comments", comments);
+        document.getElementById("commentsBox").innerHTML = comments.join('<br/>\nComment: ');
+    }
+</script>
+

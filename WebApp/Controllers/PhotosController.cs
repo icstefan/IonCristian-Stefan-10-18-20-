@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApp.DataServices;
+using WebApp.ViewModels;
 
 namespace WebApp.Controllers
 {
@@ -26,7 +27,12 @@ namespace WebApp.Controllers
                 ViewBag.Message = "No photos in the database";
             }
 
-            return View(photos);
+            var vm = new PhotosForAlbumViewModel()
+            {
+                PhotosList = photos.ToList()
+            };
+
+            return View(vm);
         }
     }
 }
