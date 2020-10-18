@@ -1,0 +1,31 @@
+﻿
+@model IEnumerable<WebApp.DTOs.AlbumDTO>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>@ViewBag.Message</h2>
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<h2 class="text-success">@ViewBag.SuccessMessage</h2>
+
+<div>
+    <h2>List of albums</h2>
+    <form asp-controller="Entertainers" asp-action="CreateEntertainer" method="post">
+        <div class="form-group">
+            <div>
+                <label asp-for="FirstName">Albums</label>
+            </div>
+            <select name="albums" id="albums">
+                @foreach (var item in Model)
+                {
+                    <option value="item.Id">@item.Title</option>
+                }
+            </select>
+            <input type="submit" value="View album" class="btn btn-sml btn-primary" />
+        </div>
+    </form>
+    <br />
+</div>
+
